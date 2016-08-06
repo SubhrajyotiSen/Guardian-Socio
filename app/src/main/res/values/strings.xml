@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Guardian</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_report">ReportActivity</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="location">Location</string>
+    <string name="crime">Crime</string>
 </resources>
