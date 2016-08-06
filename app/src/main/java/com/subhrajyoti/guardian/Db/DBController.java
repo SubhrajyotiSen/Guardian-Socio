@@ -1,9 +1,11 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.subhrajyoti.guardian.Models.ContactModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +30,10 @@ public class DBController {
         ContentValues values = new ContentValues();
 
 
-        values.put(com.subhrajyoti.guardian.DBHelper.COL_CONTACT_NAME,contactModel.getName());
-        values.put(com.subhrajyoti.guardian.DBHelper.COL_CONTACT_NUMBER,contactModel.getPhone());
+        values.put(com.subhrajyoti.guardian.Db.DBHelper.COL_CONTACT_NAME,contactModel.getName());
+        values.put(com.subhrajyoti.guardian.Db.DBHelper.COL_CONTACT_NUMBER,contactModel.getPhone());
 
-        database.insert(com.subhrajyoti.guardian.DBHelper.TABLE_NAME, null, values);
+        database.insert(com.subhrajyoti.guardian.Db.DBHelper.TABLE_NAME, null, values);
         database.close();
     }
 
@@ -41,7 +43,7 @@ public class DBController {
 
         List<ContactModel> contactModels = new ArrayList<>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + com.subhrajyoti.guardian.DBHelper.TABLE_NAME;
+        String selectQuery = "SELECT  * FROM " + com.subhrajyoti.guardian.Db.DBHelper.TABLE_NAME;
 
         Cursor cursor = db.rawQuery(selectQuery, null);
 
@@ -68,11 +70,11 @@ public class DBController {
 
         ContentValues values = new ContentValues();
 
-        values.put(com.subhrajyoti.guardian.DBHelper.COL_CONTACT_NAME, contactModel.getName());
-        values.put(com.subhrajyoti.guardian.DBHelper.COL_CONTACT_NUMBER, contactModel.getPhone());
+        values.put(com.subhrajyoti.guardian.Db.DBHelper.COL_CONTACT_NAME, contactModel.getName());
+        values.put(com.subhrajyoti.guardian.Db.DBHelper.COL_CONTACT_NUMBER, contactModel.getPhone());
 
         // updating row
-        return db.update(com.subhrajyoti.guardian.DBHelper.TABLE_NAME, values, com.subhrajyoti.guardian.DBHelper.COL_ID + " = ?",
+        return db.update(com.subhrajyoti.guardian.Db.DBHelper.TABLE_NAME, values, com.subhrajyoti.guardian.Db.DBHelper.COL_ID + " = ?",
                 new String[]{String.valueOf(contactModel.getId())});
     }
 
@@ -80,7 +82,7 @@ public class DBController {
     public void deleteContact(ContactModel contactModel) {
         SQLiteDatabase db = DBHelper.getWritableDatabase();
 
-        db.delete(com.subhrajyoti.guardian.DBHelper.TABLE_NAME, com.subhrajyoti.guardian.DBHelper.COL_ID + " = ?",
+        db.delete(com.subhrajyoti.guardian.Db.DBHelper.TABLE_NAME, com.subhrajyoti.guardian.Db.DBHelper.COL_ID + " = ?",
                 new String[]{String.valueOf(contactModel.getId())});
         db.close();
     }

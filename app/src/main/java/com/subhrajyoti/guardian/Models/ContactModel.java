@@ -1,4 +1,4 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Models;
 
 public class ContactModel {
 

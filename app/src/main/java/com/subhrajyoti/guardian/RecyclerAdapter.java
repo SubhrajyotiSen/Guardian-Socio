@@ -8,18 +8,19 @@ import android.view.ViewGroup;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.subhrajyoti.guardian.Models.ContactModel;
 
 import java.util.ArrayList;
 
 
-class RecyclerAdapter extends RecyclerView.Adapter<MainViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
 
     private ArrayList<ContactModel> arrayList;
     private ColorGenerator generator = ColorGenerator.MATERIAL;
 
 
-    RecyclerAdapter(ArrayList<ContactModel> arrayList) {
+    public RecyclerAdapter(ArrayList<ContactModel> arrayList) {
         this.arrayList = arrayList;
     }
 

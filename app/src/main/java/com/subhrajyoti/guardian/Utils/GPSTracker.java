@@ -1,4 +1,4 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Utils;
 
 
 import android.app.Service;
@@ -117,31 +117,26 @@ public class GPSTracker extends Service implements LocationListener{
 
     @Override
     public void onLocationChanged(Location arg0) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onProviderDisabled(String arg0) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onProviderEnabled(String arg0) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO Auto-generated method stub
         return null;
     }
 

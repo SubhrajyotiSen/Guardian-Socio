@@ -15,7 +15,7 @@
 
     android:orientation="vertical"
     android:paddingTop="?actionBarSize"
-    tools:context="com.subhrajyoti.guardian.ReportActivity"
+    tools:context="com.subhrajyoti.guardian.Activities.ReportActivity"
     tools:showIn="@layout/activity_main">
 
     <android.support.design.widget.TextInputLayout

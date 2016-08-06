@@ -1,4 +1,4 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -24,6 +24,8 @@ import android.widget.TimePicker;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.subhrajyoti.guardian.Models.ReportModel;
+import com.subhrajyoti.guardian.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

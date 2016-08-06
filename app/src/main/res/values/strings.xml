@@ -11,4 +11,7 @@
     <string name="Image">Image</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="letter_head">Letter Head</string>
+    <string name="start_guarding">Start guarding</string>
+    <string name="manage_emergency_contacts">Manage emergency contacts</string>
+    <string name="contact_button">Contact Button</string>
 </resources>

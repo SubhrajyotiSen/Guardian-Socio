@@ -1,4 +1,4 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Utils;
 
 import android.content.Context;
 import android.hardware.SensorListener;

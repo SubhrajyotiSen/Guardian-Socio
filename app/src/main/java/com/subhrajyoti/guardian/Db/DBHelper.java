@@ -1,4 +1,4 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -1,20 +1,20 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Activities;
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewAnimationUtils;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+
+import com.subhrajyoti.guardian.MyService;
+import com.subhrajyoti.guardian.R;
 
 import java.util.ArrayList;
 
@@ -25,54 +25,37 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton fab;
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-    private RecyclerAdapter recyclerAdapter;
-    private ArrayList<ContactModel> arrayList;
-    private LinearLayoutManager linearLayoutManager;
-
+    @BindView(R.id.switchButton)
+    Switch switchButton;
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getPermissions();
-        arrayList = new ArrayList<>();
-        recyclerAdapter = new RecyclerAdapter(arrayList);
-        linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setAdapter(recyclerAdapter);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        startService(new Intent(MainActivity.this,MyService.class));
-        startActivity(new Intent(MainActivity.this, ContactsActivity.class));
+        sharedPreferences = getSharedPreferences("Guardian", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (sharedPreferences.getBoolean("switch",false))
+            switchButton.setChecked(true);
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                editor.putBoolean("switch",b);
+                editor.apply();
+                if (b)
+                    startService(new Intent(MainActivity.this,MyService.class));
+                else
+                    stopService(new Intent(MainActivity.this,MyService.class));
+            }
+        });
+
 
     }
 
     @OnClick(R.id.fab)
     void fabClick(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            final View myView = findViewById(R.id.coordinatorLayout);
-
-            int cx = fab.getLeft();
-            int cy = fab.getTop();
-            float radius = (float) Math.hypot(myView.getWidth(),myView.getHeight());
-
-            Animator anim =
-                    ViewAnimationUtils.createCircularReveal(myView, cx, cy, 0, radius);
-            myView.setBackgroundColor(ContextCompat.getColor(this,R.color.circularRevealColor));
-            anim.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    startActivity(new Intent(MainActivity.this,ReportActivity.class));
-                }
-            });
-
-            anim.start();
-        }
-        else
-            startActivity(new Intent(MainActivity.this,ReportActivity.class));
-
-
+       startActivity(new Intent(MainActivity.this,ReportActivity.class));
     }
 
     private void getPermissions() {
@@ -99,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
                     permissions.toArray(new String[permissions.size()]), 1);
         }
     }
+
+    @OnClick(R.id.imageButton)
+    public void startContacts(){
+        startActivity(new Intent(MainActivity.this, ContactsActivity.class));
+    }
+
 
 
 

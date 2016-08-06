@@ -20,7 +20,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,19 +28,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ReportActivity"
+            android:name=".Activities.ReportActivity"
             android:label="@string/title_activity_report"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.subhrajyoti.guardian.MainActivity" />
+                android:value="com.subhrajyoti.guardian.Activities.MainActivity" />
         </activity>
 
         <service
             android:name=".MyService"
-            android:enabled="true"
-            android:exported="true" />
+            android:enabled="true" />
 
         <receiver
             android:name=".MyReceiver"
@@ -52,9 +51,14 @@
         </receiver>
 
         <activity
-            android:name=".ContactsActivity"
+            android:name=".Activities.ContactsActivity"
             android:label="@string/title_activity_contacts"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.subhrajyoti.guardian.Activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

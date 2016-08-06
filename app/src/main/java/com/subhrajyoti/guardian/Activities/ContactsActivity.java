@@ -1,4 +1,4 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.subhrajyoti.guardian.Db.DBController;
+import com.subhrajyoti.guardian.Models.ContactModel;
+import com.subhrajyoti.guardian.R;
+import com.subhrajyoti.guardian.RecyclerAdapter;
+import com.subhrajyoti.guardian.Utils.RecyclerTouchListener;
 
 import java.util.ArrayList;
 
@@ -35,6 +41,8 @@ public class ContactsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contacts);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         ButterKnife.bind(this);
         dbController = new DBController(this);

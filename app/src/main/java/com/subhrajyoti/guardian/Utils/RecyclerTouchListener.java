@@ -1,10 +1,12 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Utils;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.subhrajyoti.guardian.Activities.ContactsActivity;
 
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
