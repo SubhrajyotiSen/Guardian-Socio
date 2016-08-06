@@ -9,16 +9,18 @@ public class ReportModel implements Serializable{
     private String time;
     private String location;
     private String crime;
+    private String image;
 
     public ReportModel(){
 
     }
 
-    public ReportModel(String date, String time, String location, String crime) {
+    public ReportModel(String date, String time, String location, String crime, String image) {
         this.date = date;
         this.time = time;
         this.location = location;
         this.crime = crime;
+        this.image = image;
     }
 
     public String getDate() {
@@ -51,5 +53,12 @@ public class ReportModel implements Serializable{
 
     public void setCrime(String crime) {
         this.crime = crime;
+    }
+
+    public String getImageString(){
+        return image;
+    }
+    public void setImageString(String image){
+        this.image = image;
     }
 }

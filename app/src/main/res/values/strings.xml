@@ -6,4 +6,7 @@
     <string name="time">Time</string>
     <string name="location">Location</string>
     <string name="crime">Crime</string>
+    <string name="gallery_image">Gallery Image</string>
+    <string name="attach_images">Attach Images</string>
+    <string name="Image">Image</string>
 </resources>
