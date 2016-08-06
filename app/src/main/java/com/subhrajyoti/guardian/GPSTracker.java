@@ -1,30 +1,27 @@
 package com.subhrajyoti.guardian;
 
 
-import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.Settings;
 
 public class GPSTracker extends Service implements LocationListener{
 
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
     private final Context context;
-    protected LocationManager locationManager;
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
     Location location;
     double latitude;
     double longitude;
+    private LocationManager locationManager;
 
     public GPSTracker(Context context) {
         this.context = context;
@@ -116,32 +113,7 @@ public class GPSTracker extends Service implements LocationListener{
         return this.canGetLocation;
     }
 
-    public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
-        alertDialog.setTitle("GPS is settings");
-
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
-
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                context.startActivity(intent);
-            }
-        });
-
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        alertDialog.show();
-    }
 
     @Override
     public void onLocationChanged(Location arg0) {

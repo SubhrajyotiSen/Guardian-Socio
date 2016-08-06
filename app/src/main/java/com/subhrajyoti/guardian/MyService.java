@@ -12,11 +12,14 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MyService extends Service {
 
     private ShakeListener mShaker;
     private int count = 0;
     private GPSTracker gps;
+    private DBController dbController;
     public MyService() {
     }
 
@@ -31,6 +34,7 @@ public class MyService extends Service {
         //TODO do something useful
         Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
         gps = new GPSTracker(getApplicationContext());
+        dbController = new DBController(getApplicationContext());
         final Vibrator vibe = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
         startForeground();
         mShaker = new ShakeListener(this);
@@ -86,8 +90,16 @@ public class MyService extends Service {
     private void sendMessage(){
         try {
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage("+917026820631", null, "HELP, I am in DANGER: \n My Coordinates are"+gps.getLatitude()+" , "+gps.getLongitude(), null, null);
-            Toast.makeText(MyService.this, "", Toast.LENGTH_SHORT).show();
+            ArrayList<ContactModel> contactModels;
+            try {
+                contactModels = (ArrayList<ContactModel>) dbController.getAllContacts();
+            }
+            catch (Exception e){
+                contactModels = new ArrayList<>();
+            }
+            for (ContactModel contactModel:contactModels)
+                smsManager.sendTextMessage(contactModel.getPhone(), null, "HELP, I am in DANGER: \n My Coordinates are"+gps.getLatitude()+" , "+gps.getLongitude(), null, null);
+            Toast.makeText(MyService.this, contactModels.size()+" messages sent", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             Toast.makeText(MyService.this, "Unable to send message", Toast.LENGTH_SHORT).show();

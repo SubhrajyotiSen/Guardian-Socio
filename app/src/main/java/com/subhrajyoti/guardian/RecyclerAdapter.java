@@ -6,16 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+
 import java.util.ArrayList;
 
 
 class RecyclerAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
 
-    private ArrayList<ReportModel> arrayList;
+    private ArrayList<ContactModel> arrayList;
+    private ColorGenerator generator = ColorGenerator.MATERIAL;
 
 
-    RecyclerAdapter(ArrayList<ReportModel> arrayList) {
+    RecyclerAdapter(ArrayList<ContactModel> arrayList) {
         this.arrayList = arrayList;
     }
 
@@ -32,8 +36,10 @@ class RecyclerAdapter extends RecyclerView.Adapter<MainViewHolder> {
 
     @Override
     public void onBindViewHolder(MainViewHolder mainViewHolder, int i) {
-        mainViewHolder.dateView.setText(arrayList.get(i).getDate());
-        mainViewHolder.crimeText.setText(arrayList.get(i).getCrime());
+        mainViewHolder.nameView.setText(arrayList.get(i).getName());
+        mainViewHolder.numberView.setText(arrayList.get(i).getPhone());
+        TextDrawable drawable = TextDrawable.builder().buildRound(String.valueOf(arrayList.get(i).getName().charAt(0)).toUpperCase(), generator.getColor(arrayList.get(i).getName()));
+        mainViewHolder.imageView.setImageDrawable(drawable);
 
     }
 

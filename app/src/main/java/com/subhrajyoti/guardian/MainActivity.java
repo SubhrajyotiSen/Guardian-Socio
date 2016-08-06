@@ -3,21 +3,16 @@ package com.subhrajyoti.guardian;
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 
@@ -33,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
-    private ArrayList<ReportModel> arrayList;
+    private ArrayList<ContactModel> arrayList;
     private LinearLayoutManager linearLayoutManager;
 
     @Override
@@ -48,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(linearLayoutManager);
         startService(new Intent(MainActivity.this,MyService.class));
+        startActivity(new Intent(MainActivity.this, ContactsActivity.class));
 
     }
 
@@ -104,32 +100,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(this)) {
-            openOverlaySettings();
-        }
-    }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    private void openOverlaySettings() {
-        final Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:" + getPackageName()));
-        try {
-            startActivityForResult(intent, 1);
-        } catch (ActivityNotFoundException e) {
-            Log.e("OVERLAY", e.getMessage());
-        }
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                final boolean overlayEnabled = Settings.canDrawOverlays(this);
-                // Do something...
-                break;
-        }
-    }
 }

@@ -2,18 +2,20 @@ package com.subhrajyoti.guardian;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 class MainViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-    TextView crimeText;
-    TextView dateView;
+    TextView nameView;
+    TextView numberView;
+    ImageView imageView;
 
     MainViewHolder(View itemView) {
         super(itemView);
-        crimeText = (TextView) itemView.findViewById(R.id.crimeText);
-        dateView = (TextView) itemView.findViewById(R.id.dateView);
-
+        nameView = (TextView) itemView.findViewById(R.id.name);
+        numberView = (TextView) itemView.findViewById(R.id.number);
+        imageView = (ImageView) itemView.findViewById(R.id.letter_head);
     }
 
     @Override

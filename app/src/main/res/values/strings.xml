@@ -9,4 +9,6 @@
     <string name="gallery_image">Gallery Image</string>
     <string name="attach_images">Attach Images</string>
     <string name="Image">Image</string>
+    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="letter_head">Letter Head</string>
 </resources>
