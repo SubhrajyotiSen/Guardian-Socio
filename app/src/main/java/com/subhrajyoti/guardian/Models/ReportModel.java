@@ -10,17 +10,27 @@ public class ReportModel implements Serializable{
     private String location;
     private String crime;
     private String image;
+    private String id;
 
     public ReportModel(){
 
     }
 
-    public ReportModel(String date, String time, String location, String crime, String image) {
+    public ReportModel(String date, String time, String location, String crime, String image, String id) {
         this.date = date;
         this.time = time;
         this.location = location;
         this.crime = crime;
         this.image = image;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDate() {

@@ -13,8 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.subhrajyoti.guardian.MyService;
 import com.subhrajyoti.guardian.R;
+import com.subhrajyoti.guardian.Services.MyService;
 
 import java.util.ArrayList;
 

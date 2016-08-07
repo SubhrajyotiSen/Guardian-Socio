@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.subhrajyoti.guardian.Models.ReportModel;
 import com.subhrajyoti.guardian.R;
 
@@ -53,8 +54,7 @@ public class ReportActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private TimePickerDialog timePickerDialog;
     private DatabaseReference mDatabase;
-    private String imageString;
-
+    private String imageString = "";
 
 
     @Override
@@ -111,7 +111,7 @@ public class ReportActivity extends AppCompatActivity {
     @OnClick(R.id.fab)
     void fabClicked(){
         ReportModel reportModel = new ReportModel(dateText.getText().toString(),timeText.getText().toString()
-                ,locationText.getText().toString(),crimeText.getText().toString(),imageString);
+                ,locationText.getText().toString(),crimeText.getText().toString(),imageString, FirebaseInstanceId.getInstance().getToken());
         mDatabase.child("reports").push().setValue(reportModel);
         Snackbar.make(fab,"Report Added",Snackbar.LENGTH_SHORT).show();
         clearViews();

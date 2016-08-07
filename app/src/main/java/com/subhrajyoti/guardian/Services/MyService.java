@@ -1,4 +1,4 @@
-package com.subhrajyoti.guardian;
+package com.subhrajyoti.guardian.Services;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.subhrajyoti.guardian.Activities.MainActivity;
 import com.subhrajyoti.guardian.Db.DBController;
 import com.subhrajyoti.guardian.Models.ContactModel;
+import com.subhrajyoti.guardian.R;
 import com.subhrajyoti.guardian.Utils.GPSTracker;
 import com.subhrajyoti.guardian.Utils.ShakeListener;
 
@@ -46,6 +47,7 @@ public class MyService extends Service {
         audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
         originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         dbController = new DBController(getApplicationContext());
+        mediaPlayer= MediaPlayer.create(getApplicationContext(), R.raw.scream);
         final Vibrator vibe = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
         startForeground();
         mShaker = new ShakeListener(this);
@@ -57,6 +59,7 @@ public class MyService extends Service {
                 vibe.vibrate(100);
                 if (count>=3) {
                     count = 0;
+                    playMax();
                     if (gps.canGetLocation())
                         sendMessage();
                     else
@@ -89,7 +92,6 @@ public class MyService extends Service {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        playMax();
         Notification.Builder builder = new Notification.Builder(getBaseContext());
         builder.setContentIntent(pendIntent);
         builder.setSmallIcon(R.mipmap.ic_launcher);
@@ -136,7 +138,6 @@ public class MyService extends Service {
 
     private void playMax(){
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
-        mediaPlayer= MediaPlayer.create(getApplicationContext(), R.raw.scream);
         mediaPlayer.start();
     }
 }

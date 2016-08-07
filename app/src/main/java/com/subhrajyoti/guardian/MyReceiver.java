@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.subhrajyoti.guardian.Services.MyService;
+
 public class MyReceiver extends BroadcastReceiver {
 
     public MyReceiver() {
