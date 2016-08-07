@@ -10,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         getPermissions();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         sharedPreferences = getSharedPreferences("Guardian", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         if (sharedPreferences.getBoolean("switch",false))

@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -160,14 +161,15 @@ public class ReportActivity extends AppCompatActivity {
             Uri uri = data.getData();
             try {
                 //convert image to string
-                Bitmap bmp = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                Bitmap bmp = ThumbnailUtils.extractThumbnail(MediaStore.Images.Media.getBitmap(getContentResolver(), uri), 400, 400);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                 bmp.recycle();
                 byte[] bytes = byteArrayOutputStream.toByteArray();
                 imageString = Base64.encodeToString(bytes, Base64.DEFAULT);
                 imageView.setVisibility(View.VISIBLE);
-                imageView.setImageBitmap(parseImage(imageString));
+                imageView.setImageBitmap(imageBitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();
